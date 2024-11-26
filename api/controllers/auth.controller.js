@@ -24,18 +24,18 @@ export const signup=async(req,res,next)=>{
 export const signin=async(req,res,next)=>{
     const {email,password}=req.body;
     if(!email || !password || email==='' || password===''){
-        next(errorHandler(400,"All fields are required"))
+      return   next(errorHandler(400,"All fields are required"))
      }
 
     try{
         const user=await User.findOne({email});
         if(!user){
-            next(errorHandler(400,"User not found"))
+           return  next(errorHandler(400,"User not found"))
         }
 
         const matchPassword=await bcryptjs.compare(password,user.password);
         if(!matchPassword){
-            next(errorHandler(400,"Invalid credentials"))
+           return  next(errorHandler(400,"Invalid credentials"))
         }
         
         const token=jwt.sign({id:user._id},process.env.ACCESS_SECRET)
