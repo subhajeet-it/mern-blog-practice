@@ -16,12 +16,13 @@ const DashSideBar = () => {
     <Sidebar className="w-full md:w-56" aria-label="Default sidebar example">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Link to={`/dashboard?tab=profile`}>
+          <Link to={`/dashboard?tab=profile`} >
             <Sidebar.Item
               active={tab === "profile"}
               label={"User"}
               icon={HiUser}
               labelColor="dark"
+              as='div'
             >
               Profile
             </Sidebar.Item>
