@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyToken } from "../utils/verifyToken.js";
-import { updateUser } from "../controllers/user.controller.js";
+import { updateUser,deleteUser } from "../controllers/user.controller.js";
 const router=express.Router();
 
 router.get("/test",(req,res)=>{
@@ -9,5 +9,6 @@ router.get("/test",(req,res)=>{
 })
 
 router.put("/update/:userId",verifyToken,updateUser)
+router.delete("/delete/:userId",verifyToken,deleteUser)
 
 export default router;
