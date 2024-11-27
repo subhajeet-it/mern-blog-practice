@@ -14,6 +14,8 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import ThemeProvider from "./components/ThemeProvider.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute.jsx";
+import CreatePost from "./pages/CreatePost.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +28,10 @@ const router = createBrowserRouter([
       {
         element: <PrivateRoute />,
         children: [{ path: "/dashboard", element: <Dashboard /> }],
+      },
+      {
+        element: <OnlyAdminPrivateRoute />,
+        children: [{ path: "/create-post", element: <CreatePost /> }],
       },
       { path: "/project", element: <Project /> },
     ],

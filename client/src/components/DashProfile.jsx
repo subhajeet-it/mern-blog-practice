@@ -3,9 +3,9 @@ import { Alert, Button, TextInput,Modal } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteInFailed, deleteInStart, deleteInSuccess, signoutInSuccess, updateInFailed, updateInStart, updateInSuccess } from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const DashProfile = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser,loading } = useSelector((state) => state.user);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [imageFile, setImageFile] = useState(null);
@@ -155,9 +155,25 @@ const handleSignOut=async()=>{
         />
         <TextInput type="password" id="password" placeholder="password"  
         onChange={textInputChange}/>
-        <Button type="submit" gradientDuoTone="purpleToBlue" outline>
-          Update
+         <Button
+          type='submit'
+          gradientDuoTone='purpleToBlue'
+          outline
+          disabled={loading}
+        >
+          {loading ? 'Loading...' : 'Update'}
         </Button>
+        {currentUser.isAdmin && (
+          <Link to={'/create-post'}>
+            <Button
+              type='button'
+              gradientDuoTone='purpleToPink'
+              className='w-full'
+            >
+              Create a post
+            </Button>
+          </Link>
+        )}
       </form>
       {updateUserError && <Alert color="failure">{updateUserError}</Alert>}
       {updateUserSuccess && <Alert color="success">{updateUserSuccess}</Alert>}
